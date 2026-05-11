@@ -1,0 +1,12 @@
+---
+description: 全宽或 Figma 导入页面时，禁止遗留 Vue 默认模板对 #app/body 的居中与双栏 grid 布局
+alwaysApply: true
+---
+
+# 全宽页面与全局布局
+
+当项目以**全宽工作台 / Figma 导入页 / 后台布局**为主，而非默认 Vue Welcome 双栏时，必须遵守：
+
+1. **检查 `src/assets/main.css`（及任何全局样式）** 中的 `#app`、`body`：是否存在 `max-width`、`margin: auto`、大 padding，以及 **`@media (min-width: 1024px)` 下对 `#app` 的 `display: grid` + 多列**、对 `body` 的 **`display: flex` + `place-items: center`**。若存在且与全宽布局冲突，应在 **main.css 层面**改为 `#app { display: block; max-width: none; width: 100%; margin: 0; padding: 0 }`，`body` 使用 `display: block`（或正常文档流），不得依赖仅在 `App.vue` 里改 `max-width` 而**未覆盖 `display`**。
+2. **顶栏与主内容区**若需对齐，应统一 `max-width` 与水平内边距策略，避免出现顶栏明显宽于正文栅格的错位。
+3. 新建页面或替换 `App.vue` 根组件时，**默认执行一次**全局布局自检，避免再次出现「大屏比例异常」类问题。
