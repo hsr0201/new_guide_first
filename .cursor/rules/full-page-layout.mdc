@@ -1,6 +1,6 @@
 ---
 description: 全宽或 Figma 导入页面时，禁止遗留 Vue 默认模板对 #app/body 的居中与双栏 grid 布局
-alwaysApply: true
+alwaysApply: false
 ---
 
 # 全宽页面与全局布局
